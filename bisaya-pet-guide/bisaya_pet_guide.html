@@ -19,6 +19,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -30,7 +31,7 @@
         header {
             background: linear-gradient(135deg, var(--primary), #FF8E53);
             color: white;
-            padding: 3rem 1rem;
+            padding: 2rem 1rem; /* Reduced padding */
             text-align: center;
             border-bottom-left-radius: 30px;
             border-bottom-right-radius: 30px;
@@ -38,15 +39,15 @@
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 2rem; /* Slightly smaller */
+            margin-bottom: 0.25rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1rem;
             opacity: 0.9;
             max-width: 600px;
             margin: 0 auto;
@@ -55,31 +56,70 @@
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 2rem 1rem;
+            padding: 1.5rem 1rem;
         }
 
         .intro-card {
             background: white;
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 20px;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             text-align: center;
         }
 
         .badge {
             display: inline-block;
-            background: var(--accent);
-            color: var(--dark);
+            background: var(--dark); /* Changed to dark for contrast */
+            color: white;
             padding: 0.25rem 1rem;
             border-radius: 50px;
             font-weight: bold;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Quick Nav Buttons */
+        .quick-nav {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 2px solid transparent;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 10px rgba(0,0,0,0.15);
+        }
+
+        .nav-btn.cats {
+            background: var(--secondary);
+            color: #004d40;
+        }
+
+        .nav-btn.chickens {
+            background: var(--accent);
+            color: #5d4037;
         }
 
         .recipe-section {
             margin-bottom: 4rem;
+            scroll-margin-top: 2rem; /* Fix for anchor positioning */
         }
 
         .recipe-header {
@@ -207,31 +247,29 @@
             font-size: 0.9rem;
         }
 
-        .btn-host {
-            display: inline-block;
-            background: var(--dark);
-            color: white;
-            text-decoration: none;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            margin-top: 2rem;
-            font-weight: bold;
-        }
-
     </style>
 </head>
 <body>
 
     <header>
         <h1>Barato Pet Feasts</h1>
-        <p class="subtitle">The Ultimate "Way Labad" Guide for Cebuano Pet Lovers. Pakaon sa manok ug iring nga dili sakit sa bulsa!</p>
+        <p class="subtitle">The Ultimate Guide for Cebuano Pet Lovers.</p>
     </header>
 
     <div class="container">
         
         <div class="intro-card">
-            <span class="badge">BUDGET FRIENDLY</span>
-            <p>Welcome, ka-Barato! Tired of buying expensive cat food? Want your manok to be healthy without spending your whole sweldo? This guide is for you. Simple, safe, and Bisaya-friendly steps to keep our furry and feathered friends happy.</p>
+            <span class="badge">CHOOSE YOUR PET</span>
+            <p>Cheap, safe, and "way labad" recipes. Save money, save lives.</p>
+            
+            <div class="quick-nav">
+                <a href="#cats" class="nav-btn cats">
+                    🐱 For Cats
+                </a>
+                <a href="#chickens" class="nav-btn chickens">
+                    🐔 For Chickens
+                </a>
+            </div>
         </div>
 
         <!-- CAT SECTION -->
