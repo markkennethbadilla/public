@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barato Pet Feasts: The Cebuano Guide</title>
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --dark: #2C3E50;
+            --light: #F7F9FC;
+            --text-gray: #4A5568;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), #FF8E53);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .intro-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.25rem 1rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .recipe-section {
+            margin-bottom: 4rem;
+        }
+
+        .recipe-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .recipe-icon {
+            font-size: 3rem;
+        }
+
+        .recipe-title h2 {
+            font-size: 2rem;
+            color: var(--dark);
+        }
+
+        .ingredients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .ingredient-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--secondary);
+        }
+
+        .ingredient-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .ingredient-desc {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .step-card {
+                flex-direction: row;
+                align-items: center;
+            }
+            .step-image {
+                width: 40%;
+                height: auto;
+            }
+            .step-content {
+                width: 60%;
+            }
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: #eee;
+        }
+
+        .step-content {
+            padding: 2rem;
+        }
+
+        .step-number {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .danger-box {
+            background: #FFF5F5;
+            border-left: 5px solid #E53E3E;
+            color: #C53030;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-radius: 10px;
+        }
+
+        .danger-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .btn-host {
+            display: inline-block;
+            background: var(--dark);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            margin-top: 2rem;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Barato Pet Feasts</h1>
+        <p class="subtitle">The Ultimate "Way Labad" Guide for Cebuano Pet Lovers. Pakaon sa manok ug iring nga dili sakit sa bulsa!</p>
+    </header>
+
+    <div class="container">
+        
+        <div class="intro-card">
+            <span class="badge">BUDGET FRIENDLY</span>
+            <p>Welcome, ka-Barato! Tired of buying expensive cat food? Want your manok to be healthy without spending your whole sweldo? This guide is for you. Simple, safe, and Bisaya-friendly steps to keep our furry and feathered friends happy.</p>
+        </div>
+
+        <!-- CAT SECTION -->
+        <section class="recipe-section" id="cats">
+            <div class="recipe-header">
+                <span class="recipe-icon">🐱</span>
+                <div class="recipe-title">
+                    <h2>"Stray Saver" Lugaw</h2>
+                    <p>Make rice taste like premium tuna. Safe for kidney, yummy sa tummy.</p>
+                </div>
+            </div>
+
+            <div class="ingredients-grid">
+                <div class="ingredient-card">
+                    <div class="ingredient-name">Fish Scraps (Tinap-unan)</div>
+                    <div class="ingredient-desc">Heads, intestines, bones. Ask sa wet market for "scraps".</div>
+                </div>
+                <div class="ingredient-card">
+                    <div class="ingredient-name">Binlod Rice</div>
+                    <div class="ingredient-desc">Broken rice or NFA. Much cheaper, same busog.</div>
+                </div>
+                <div class="ingredient-card">
+                    <div class="ingredient-name">Water</div>
+                    <div class="ingredient-desc">Lots of it! Hydration is life for cats.</div>
+                </div>
+            </div>
+
+            <div class="steps-container">
+                <div class="step-card">
+                    <img src="cat_step1.png" alt="Clean Fish" class="step-image">
+                    <div class="step-content">
+                        <div class="step-number">Step 1</div>
+                        <h3 class="step-title">The "Dakong Disgrasya" Check (Apdo Removal)</h3>
+                        <p>Wash the fish parts well. But wait! <b>CRITICAL MISSION:</b> Find the small green sac (bile/apdo). You MUST cut it out carefully.</p>
+                        <p style="margin-top:0.5rem;font-size:0.9rem;color:#E53E3E;"><i>⚠️ If this bursts, pait kaayo ang food. The cats will STARVE rather than eat it. Sayang lang imo effort!</i></p>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <img src="cat_step2.png" alt="Boil Broth" class="step-image">
+                    <div class="step-content">
+                        <div class="step-number">Step 2</div>
+                        <h3 class="step-title">Pabukal to the Max</h3>
+                        <p>Boil the fish parts in plenty of water. Hulat until cloudy ang tubig and smell is strong (mga 10-15 mins). That smell? That's the "flavor bomb" for the cats.</p>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <img src="cat_step3.png" alt="Strain" class="step-image">
+                    <div class="step-content">
+                        <div class="step-number">Step 3</div>
+                        <h3 class="step-title">The Separation (Walay Bones Allowed)</h3>
+                        <p>Scoop out <b>ALL</b> solids—heads, bones, everything. Set them aside. We only need the yummy fish water for the rice. Why? Because sharp bones = hospital bills. Dili ta gusto ana.</p>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <img src="cat_step4.png" alt="Mash" class="step-image">
+                    <div class="step-content">
+                        <div class="step-number">Step 4</div>
+                        <h3 class="step-title">Mag Luto ug Lugaw + Mash</h3>
+                        <p>Pour the Binlod rice directly into the boiling fish water. Cook until wet and mushy lugaw. While waiting, pick the soft meat from the bones you set aside. Mash it back into the lugaw. Throw away the hard bones!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="danger-box">
+                <div class="danger-title">⛔ BAWAL ANG:</div>
+                <ul>
+                    <li><b>Onions & Garlic:</b> Never! Toxic ni sa iring.</li>
+                    <li><b>Cooked Bones:</b> They splinter into sharp needles. Delikado sa tiyan.</li>
+                    <li><b>Bitter Apdo:</b> Sayang ang food, dili nila kan-on.</li>
+                </ul>
+            </div>
+        </section>
+
+
+        <!-- CHICKEN SECTION -->
+        <section class="recipe-section" id="chickens">
+            <div class="recipe-header">
+                <span class="recipe-icon">🐔</span>
+                <div class="recipe-title">
+                    <h2>"Market Mix" Power Feed</h2>
+                    <p>Bulk volume + Free Calcium. Para sa mga eggs nga gahi og shell!</p>
+                </div>
+            </div>
+
+            <div class="ingredients-grid">
+                <div class="ingredient-card">
+                    <div class="ingredient-name">Tahop + Binlod</div>
+                    <div class="ingredient-desc">Rice bran mixed with corn grits. Cheapest "fillers" sa market.</div>
+                </div>
+                <div class="ingredient-card">
+                    <div class="ingredient-name">Veggie Scraps</div>
+                    <div class="ingredient-desc">Cabbage cores, wilted pechay. Ask for "trimmings", usually free!</div>
+                </div>
+                <div class="ingredient-card">
+                    <div class="ingredient-name">Eggshells</div>
+                    <div class="ingredient-desc">Free calcium booster. Collect from karinderyas.</div>
+                </div>
+            </div>
+
+            <div class="steps-container">
+                <div class="step-card">
+                    <img src="chicken_step1.png" alt="Crush Shells" class="step-image">
+                    <div class="step-content">
+                        <div class="step-number">Step 1</div>
+                        <h3 class="step-title">Dugmok is Life (Shell Prep)</h3>
+                        <p>Dry the eggshells in the sun first. Then, crush them into powder or small bits. If you don't do this, chickens might learn to eat their own eggs. Warning na!</p>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <img src="chicken_step2.png" alt="Chop Veggies" class="step-image">
+                    <div class="step-content">
+                        <div class="step-number">Step 2</div>
+                        <h3 class="step-title">Chop-Chop Veggies</h3>
+                        <p>Chop the vegetable scraps into beak-sized pieces. Dili sila ganahan perting dakua, lisod tulon. Think of it as making a salad for them.</p>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <img src="chicken_step3.png" alt="Mix Everything" class="step-image">
+                    <div class="step-content">
+                        <div class="step-number">Step 3</div>
+                        <h3 class="step-title">Mix & Serve</h3>
+                        <p>In a bucket, mix 2 parts Tahop + 1 part Binlod. Add water until crumbly/moist (dili soup!). Mix in your veggies and crushed shells. Boom! Fiesta na sa tangkal.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="danger-box">
+                <div class="danger-title">⛔ BAWAL ANG:</div>
+                <ul>
+                    <li><b>Raw Dried Beans:</b> Toxic for chickens.</li>
+                    <li><b>Moldy Bread:</b> Ale molds can kill them fast.</li>
+                    <li><b>Avocado Skins:</b> Poisonous to birds.</li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+
+    <div class="footer">
+        <p>Made with ❤️ for Cebu's Pets.</p>
+        <p>Keep saving strays, one bowl at a time.</p>
+    </div>
+
+</body>
+</html>
