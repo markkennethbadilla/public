@@ -1,0 +1,19 @@
+{
+  // ╔══════════════════════════════════════════════════════════════════╗
+  // ║  MCP Server Configuration — Workspace Level                    ║
+  // ║  Moved from user-level to E:\.vscode for full context control  ║
+  // ╚══════════════════════════════════════════════════════════════════╝
+  "servers": {
+    // Playwright MCP — connects to existing Chrome via CDP on port 9222
+    // Launch Chrome first: E:\copilot-memory\scripts\launch-chrome-cdp.ps1
+    // Output dir for screenshots etc
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest",
+        "--cdp-endpoint", "http://localhost:9222",
+        "--output-dir", "D:\\Users\\Mark\\Downloads"
+      ]
+    }
+  }
+}

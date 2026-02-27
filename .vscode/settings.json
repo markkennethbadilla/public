@@ -1,0 +1,251 @@
+{
+  // ╔══════════════════════════════════════════════════════════════════╗
+  // ║  E:\ Root Workspace — Authoritative Settings                   ║
+  // ║  All VS Code config lives HERE. No user-level settings.json.   ║
+  // ║  Comments persist because workspace settings support JSONC.    ║
+  // ╚══════════════════════════════════════════════════════════════════╝
+
+  // ── Agent Architecture ──
+  // AGENTS.md in root + nested dirs = full behavioral control
+  "chat.useAgentsMdFile": true,
+  "chat.useNestedAgentsMdFiles": true,
+  "github.copilot.chat.codeGeneration.useInstructionFiles": false,
+
+  // ── Copilot Agent — NO LIMITS ──
+  // Agent mode: unlimited requests, auto-approve everything
+  "chat.agent.enabled": true,
+  "chat.agent.maxRequests": 10000,
+  "chat.tools.global.autoApprove": true,
+  "chat.tools.terminal.autoReplyToPrompts": true,
+  "chat.tools.terminal.blockDetectedFileWrites": "never",
+  "chat.tools.terminal.outputLocation": "terminal",
+  "chat.requestQueuing.enabled": true, // Prevent dropped requests during rapid exchanges
+  "chat.agent.showExpandedToolCalls": true,
+  "chat.agent.thinking.collapsedTools": "off",
+  "chat.agent.thinking.generateTitles": false,
+  "chat.agentSessionProjection.enabled": true,
+  "chat.customAgentInSubagent.enabled": true,
+
+  // ── Copilot Intelligence — UNCONSTRAINED ──
+  // No thinking budget caps, no reasoning effort throttles
+  "github.copilot.chat.anthropic.thinking.budgetTokens": 16384,
+  "github.copilot.chat.anthropic.tools.websearch.enabled": false,
+  "github.copilot.chat.anthropic.contextEditing.enabled": false,
+  "github.copilot.chat.virtualTools.threshold": 36,
+  "github.copilot.chat.askQuestions.enabled": false,
+  "github.copilot.editor.preferredLanguage": "python",
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "github.copilot.chat.notebook.enhancedNextEditSuggestions.enabled": true,
+  "github.copilot.chat.submitWithEnter": false,
+
+  // Inline completions OFF (only agent mode matters)
+  "github.copilot.enable": {
+    "*": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  },
+
+  // ── Network Stability ──
+  // These settings prevent Copilot connection drops, especially through VPN
+  "http.proxySupport": "override", // Default; respects system proxy without breaking direct connections
+  "http.systemCertificates": true, // Use OS cert store for TLS
+  "http.experimental.systemCertificatesV2": true, // Enhanced cert handling
+  "http.fetchAdditionalSupport": true, // Extra fetch reliability
+  "http.proxyStrictSSL": true, // Enforce valid certs
+  "github.copilot.advanced": {
+    "debug.useNodeFetcher": true, // Node.js fetch = more stable than Electron net
+    "debug.overrideProxyUrl": "" // No proxy override; direct connection
+    // NOTE: No "length" cap. Removed to allow unlimited response size.
+  },
+
+  // ── Chat UI ──
+  "chat.extensionTools.enabled": false,
+  "chat.viewWelcome.enabled": false,
+  "chat.mcp.gallery.enabled": true,
+  "chat.mcp.autostart": "always", // MCP servers start automatically — needed since config is workspace-level
+  "chat.instructionsFilesLocations": { ".github/instructions": true },
+  "chat.editMode.hidden": true,
+  "chat.editing.confirmEditRequestRetry": false,
+  "chat.editing.confirmEditRequestRemoval": false,
+  "chat.editRequests": "input",
+  "chat.notifyWindowOnConfirmation": false,
+  "chat.notifyWindowOnResponseReceived": false,
+  "chat.tips.enabled": true,
+  "chat.useAgentSkills": false,
+  "chat.useClaudeMdFile": false,
+  "chat.viewProgressBadge.enabled": true,
+  "chat.viewSessions.orientation": "sideBySide",
+  "chat.viewSessions.enabled": true,
+  "chat.unifiedAgentsBar.enabled": true,
+  "chat.agentsControl.enabled": true,
+  "chat.restoreLastPanelSession": true,
+  "github.copilot.chat.terminalChatLocation": "terminal",
+  "inlineChat.notebookAgent": true,
+  "inlineChat.defaultModel": "Raptor mini (Preview) (copilot)",
+  "inlineChat.enableV2": true,
+  "editor.aiStats.enabled": true,
+
+  // ── Search — copilot-memory MUST be searchable ──
+  "search.useIgnoreFiles": false,
+  "search.useGlobalIgnoreFiles": false,
+  "search.useParentIgnoreFiles": false,
+  "search.followSymlinks": false,
+  "search.smartCase": true,
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/.git": true,
+    "**/coverage": true,
+    "**/*.min.js": true,
+    "**/prisma/migrations": true,
+    "**/__pycache__": true,
+    "**/.mypy_cache": true,
+    "**/.pytest_cache": true,
+    "**/venv": true,
+    "**/.venv": true
+  },
+
+  // ── Files ──
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "files.defaultLanguage": "plaintext",
+  "files.eol": "\n",
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/.next/**": true,
+    "**/dist/**": true,
+    "**/build/**": true,
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/coverage/**": true,
+    "**/prisma/migrations/**": true,
+    "**/__pycache__/**": true,
+    "**/.mypy_cache/**": true,
+    "**/.pytest_cache/**": true,
+    "**/venv/**": true,
+    "**/.venv/**": true
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/*.tsbuildinfo": true,
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/__pycache__": true,
+    "**/.mypy_cache": true,
+    "**/.pytest_cache": true,
+    "**/coverage": true,
+    "System Volume Information": true,
+    "$RECYCLE.BIN": true
+  },
+
+  // ── Editor — Performance, NO artificial limits ──
+  // Removed: maxTokenizationLineLength, editor limit, participants timeout
+  // These were capping resources unnecessarily
+  "editor.cursorBlinking": "solid",
+  "editor.cursorSmoothCaretAnimation": "off",
+  "editor.smoothScrolling": false,
+  "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "none",
+  "editor.occurrencesHighlight": "off",
+  "editor.selectionHighlight": false,
+  "editor.codeLens": false,
+  "editor.hover.delay": 500,
+  "editor.largeFileOptimizations": true,
+  "editor.formatOnSave": false,
+  "editor.wordBasedSuggestions": "off",
+  "editor.accessibilitySupport": "off",
+  "editor.links": false,
+  "editor.fontLigatures": false,
+  "editor.tabSize": 2,
+  "editor.linkedEditing": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": false,
+  "editor.guides.indentation": false,
+  "editor.inlineSuggest.enabled": true,
+  "editor.suggest.preview": true,
+  "editor.quickSuggestions": { "strings": true },
+  "editor.parameterHints.enabled": true,
+  "editor.renderLineHighlight": "gutter",
+  "editor.stickyScroll.enabled": false,
+  "editor.wordWrap": "on",
+  "diffEditor.maxComputationTime": 0, // No diff computation time limit
+
+  // ── Terminal ──
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.scrollback": 10000, // Generous buffer for agent output
+  "terminal.integrated.gpuAcceleration": "on",
+  "terminal.integrated.smoothScrolling": false,
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "path": "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
+    },
+    "Command Prompt": {
+      "path": ["${env:windir}\\Sysnative\\cmd.exe", "${env:windir}\\System32\\cmd.exe"],
+      "args": [],
+      "icon": "terminal-cmd"
+    },
+    "Git Bash": {
+      "source": "Git Bash",
+      "icon": "terminal-git-bash"
+    }
+  },
+
+  // ── Workbench ──
+  "workbench.reduceMotion": "on",
+  "workbench.list.smoothScrolling": false,
+  "workbench.enableExperiments": false,
+  "workbench.settings.enableNaturalLanguageSearch": false,
+  "workbench.editor.enablePreview": true,
+  "workbench.colorTheme": "Default Dark Modern",
+  "workbench.preferredDarkColorTheme": "Default Dark Modern",
+  "workbench.preferredLightColorTheme": "Default Light Modern",
+  "workbench.activityBar.location": "top",
+  "workbench.startupEditor": "none",
+  "workbench.navigationControl.enabled": false,
+  "workbench.editor.empty.hint": "hidden",
+
+  // ── Window ──
+  "window.autoDetectColorScheme": true,
+  "window.restoreWindows": "preserve",
+  "window.menuBarVisibility": "compact",
+
+  // ── Extensions & Git ──
+  "extensions.autoUpdate": false,
+  "extensions.autoCheckUpdates": false,
+  "extensions.ignoreRecommendations": true,
+  "npm.autoDetect": "off",
+  "git.repositoryScanMaxDepth": 3, // digits-wrapper/a/digitsv2-A is 3 levels deep
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "git.openRepositoryInParentFolders": "always",
+  "git.autofetch": false,
+
+  // ── Language-specific ──
+  "[markdown]": { "editor.wordWrap": "on" },
+  "markdown.preview.breaks": true,
+  "css.lint.unknownAtRules": "ignore",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.tsserver.experimental.enableProjectDiagnostics": false,
+  "typescript.disableAutomaticTypeAcquisition": true,
+  // No typescript.tsserver.maxTsServerMemory — let it use whatever it needs
+
+  // ── Privacy & Misc ──
+  "telemetry.telemetryLevel": "off",
+  "update.showReleaseNotes": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "breadcrumbs.enabled": false,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.compactFolders": false,
+  "scm.repositories.selectionMode": "single",
+  "settingsSync.ignoredResources": ["mcp"]
+}
