@@ -63,7 +63,7 @@
   "chat.extensionTools.enabled": false,
   "chat.viewWelcome.enabled": false,
   "chat.mcp.gallery.enabled": true,
-  "chat.mcp.autostart": "always", // MCP servers start automatically — needed since config is workspace-level
+  "chat.mcp.autostart": "newAndOutdated", // MCP servers start automatically — needed since config is workspace-level
   "chat.instructionsFilesLocations": { ".github/instructions": true },
   "chat.editMode.hidden": true,
   "chat.editing.confirmEditRequestRetry": false,
@@ -75,7 +75,7 @@
   "chat.useAgentSkills": false,
   "chat.useClaudeMdFile": false,
   "chat.viewProgressBadge.enabled": true,
-  "chat.viewSessions.orientation": "sideBySide",
+  "chat.viewSessions.orientation": "stacked",
   "chat.viewSessions.enabled": true,
   "chat.unifiedAgentsBar.enabled": true,
   "chat.agentsControl.enabled": true,
