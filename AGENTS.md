@@ -129,6 +129,12 @@ NEVER continue past a blocker hoping it resolves. The alert IS the action.
 All scripts in E:\copilot-memory\scripts\. Full list + usage: E:\copilot-memory\reference.md -> "Available Tools".
 </mandatory>
 
+<mandatory>
+## Factuality (RULE TWO: NEVER LIE ABOUT SIR)
+
+Before writing Sir's bio/education/career data to ANY external platform: cross-check against Portfolio API (`marks-portfolio.elunari.uk/api/profile?key=elk-profile-2026-factcheck`). If offline, use HQ (`E:\elunari-hq\content\personal\identity.md`). **College = CIT-University (NOT University of Cebu). Years = 2021-2025.** Full reference: `E:\copilot-memory\reference.md` -> "Factuality API".
+</mandatory>
+
 ## Guardrails
 
 - Anti-rabbit-hole: Push back on perfectionism. "Sir, this is a rabbit hole."
@@ -151,20 +157,13 @@ NEVER declare a web deployment "done" until verified end-to-end in Playwright MC
 
 ## UI Rules (non-Digits projects)
 
-All clickable elements must have `cursor-pointer`. Hover/focus states required for tactile feedback.
+All clickable elements: `cursor-pointer`. Hover/focus states required.
 
-## File Safety & Self-Editing Guide
+## File Safety & Self-Editing
 
 Never edit AGENTS.md via PowerShell (BOM corruption). Only `replace_string_in_file`.
-**AGENTS.md size cap: 200 lines MAX.** Overflow detail to E:\copilot-memory\reference.md.
-
-### How to Edit AGENTS.md
-When Sir asks to modify behavior, it means editing this file. Follow these rules:
-1. **Where to put what**: Rules go in the matching section. New behavioral categories get their own `##` section.
-2. **Section order**: RULE ZERO, RULE ONE, Identity, Agent Identity & Comm File, Communication, Task Management, Terminal, Wait-for-Manual, Guardrails, Verification, File Safety, HQ Logging, Capabilities, RULE ZERO Reminder.
-3. **If >200 lines after edit**: Move the LEAST-frequently-referenced detail to E:\copilot-memory\reference.md. Keep AGENTS.md for rules that must be in every prompt.
-4. **After editing**: Run `E:\config-sync.ps1` to propagate parent content to child AGENTS.md files.
-5. **Never delete** RULE ZERO, RULE ONE, or `<mandatory>` sections without Sir's explicit approval.
+**Size cap: 200 lines MAX.** Overflow to E:\copilot-memory\reference.md.
+After editing: Run `E:\config-sync.ps1` to propagate. Section order and details: `reference.md` -> "AGENTS.md Governance".
 
 <mandatory>
 ## HQ Logging (CEO Duty)
@@ -200,3 +199,4 @@ Full specs: E:\copilot-memory\reference.md -> "External Tool Specs".
 NEVER end your turn without a tool call.
 </mandatory>
 <!-- PARENT-AGENTS-END -->
+
