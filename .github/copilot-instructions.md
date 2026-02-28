@@ -155,9 +155,13 @@ All clickable elements: `cursor-pointer`. Hover/focus states required.
 <mandatory>
 ## Design Production Rules
 
-**Icons & Favicons**: NEVER hand-code SVG icons or create placeholder favicons. Use `E:\content-pipeline` to generate all visual assets (icons, favicons, OG images). Run the pipeline with appropriate presets. Every site MUST have a unique, professionally generated favicon — not a default Next.js icon.
+**Icons & Favicons**: NEVER hand-code SVG icons or create placeholder favicons. Generate via Gemini (gemini.google.com/u/1/app — Imagen model) or `E:\content-pipeline`. Every site MUST have: favicon.ico (48x48), apple-touch-icon.png (180x180), icon-192.png, icon-512.png (for PWA). Export as PNG, convert to ICO via pipeline. Default Next.js icons = BUG.
+**PWA Manifest**: Every site needs `manifest.json`/`site.webmanifest` with `name`, `short_name`, `icons` (192+512), `theme_color`, `background_color`, `display: standalone`. Test: Chrome DevTools > Application > Manifest shows no errors.
+**OpenGraph & Meta**: Every page needs: `title`, `description`, `og:image` (1200x630), `og:type`, `og:url`, `twitter:card=summary_large_image`. Use Next.js `generateMetadata` + dynamic `opengraph-image.tsx` (ImageResponse API). OG images MUST match brand palette — never generic.
 **Personality requirement**: Every site must feel designed by a human with a specific personality. Before building UI, define: color palette (from brand), typography pairing (never Inter), interaction style (subtle, not flashy), and content voice. Document in project's `_agent-context.md`.
-**Spacing enforcement**: Every section, card, and content block MUST have intentional vertical spacing. After writing any component, verify via Playwright `getComputedStyle` that `margin`, `padding`, and `gap` values are non-zero where content exists. Minimum: `py-12` between major sections, `py-6` between sub-sections, `gap-4` between cards. If computed padding/margin is `0px` on a content container, it is a BUG.
+**Mobile-first (MANDATORY)**: Design for 375px first, then scale up. Use Tailwind responsive prefixes (sm:, md:, lg:) for desktop overrides. Test EVERY page at 375x812 via Playwright `browser_resize`. No horizontal scroll. Touch targets min 44x44px. Text readable without zoom (min 16px body).
+**Spacing enforcement**: Every section, card, and content block MUST have intentional vertical AND horizontal spacing. After writing any component, verify via Playwright `getComputedStyle` that `margin`, `padding`, and `gap` values are non-zero where content exists. Minimums: `py-16 md:py-20` between major sections, `py-8 md:py-12` between sub-sections, `gap-4 md:gap-6` between cards, `px-4 md:px-6 lg:px-8` page gutters. If computed padding/margin is `0px` on a content container, it is a BUG.
+**Cross-platform**: Test on Chrome (Playwright), verify meta tags render on social preview tools. Ensure all images have `alt` text, all links have `aria-label` where text is not descriptive.
 </mandatory>
 
 ## File Safety & Self-Editing
@@ -241,9 +245,41 @@ I have FULL ACCESS to Sir's environment — not just code tools:
 **Knowledge Base** (E:\elunari-hq/content/): Sir's complete personal info. Handle with empathy. Never share publicly.
 **Credentials** (D:\Users\Mark\OneDrive\Documents\credentials.md): Passwords, API keys, tokens, email accounts. OneDrive-synced — always use this path.
 
-**External Tools** (via Playwright/scripts, NOT direct API calls):
-Cloudflare, Gemini, NocoDB, Vercel, GitHub, Google Search Console, Bing Webmaster Tools.
-Full specs: E:\.github\reference.md -> "External Tool Specs".
+### Available APIs (call directly from scripts/code)
+- **HQ Dashboard**: `hq.elunari.uk/api/profile?key=elk-hq-2026-ceo-api` — Also: `/api/summary`, `/api/asset`, `/api/goal`, `/api/decision`, `/api/revenue`, `/api/expense`
+- **Portfolio**: `marks-portfolio.elunari.uk/api/profile?key=elk-profile-2026-factcheck` — Sir's verified bio data
+- **HQ NocoDB** (internal): `. E:\.github\scripts\hq-api.ps1` to load functions: `Log-Decision`, `Log-Revenue`, `Log-Expense`, `Log-Asset`
+- **Content Pipeline**: `E:\content-pipeline` — Python pipeline for generating icons, favicons, OG images. Config: `config.yaml`, presets: `presets.yaml`
+
+### Available Scripts (E:\.github\scripts\)
+- `alert.ps1 <msg>` — Pop-up alert for manual steps (2FA, CAPTCHA). ALWAYS use for blockers.
+- `hq-api.ps1` — Dot-source to get `Log-Decision`, `Log-Revenue`, `Log-Expense`, `Log-Asset` functions
+- `sync-hq.ps1` — Dot-source then `Sync-HQ` to sync HQ dashboard data
+- `launch-chrome-cdp.ps1` — Launch Chrome with CDP on port 9222 (if Playwright disconnected)
+- `setup-copilot-env.ps1` — Portable fix for Copilot connection issues (TCP keepalive, HTTP/2 disable, VPN MTU)
+- `cleanup-agents.ps1` — Clean stale agents >24h from agents.json, delete orphaned NOTES files
+- `network-watchdog.ps1` — Test GitHub/Copilot endpoints, flush DNS on failure
+- `fix-tcp-keepalive.ps1` — Set TCP keepalive to 30s (registry, needs elevation)
+
+### External Services (via Playwright browser — all pre-logged-in)
+- **Cloudflare**: DNS management for elunari.uk domains. Dashboard at dash.cloudflare.com
+- **Vercel**: CLI deployments (`vercel` command). Dashboard at vercel.com/iammkb2002
+- **GitHub**: github.com/iammkb2002. All repos listed in Projects section above.
+- **Google Search Console**: search.google.com/search-console — for SEO indexing
+- **Bing Webmaster Tools**: bing.com/webmasters — use Microsoft SSO only
+- **NocoDB**: Self-hosted at hq.elunari.uk — backend for HQ dashboard
+- **Gemini**: gemini.google.com/u/1/app — capybaracko@gmail.com (ALWAYS use /u/1/)
+- **Gumroad**: gumroad.com — digital product sales
+- **Buy Me a Coffee**: buymeacoffee.com — donations
+- **Adsterra**: adsterra.com — ad revenue
+
+### Live Websites (Elunari Corp)
+- **elunari.uk** — Main brand site (E:\elunari\)
+- **marks-portfolio.elunari.uk** — Sir's portfolio (E:\portfolio\)
+- **hq.elunari.uk** — CEO dashboard (E:\elunari-hq\)
+- **studio.elunari.uk** — Web design studio (E:\elunari-studio\)
+- **menuprices.ph** — Menu prices directory (E:\menuprices-ph\)
+- **blog.elunari.uk** — Tech blog (E:\blog\)
 </capabilities>
 
 <mandatory>
