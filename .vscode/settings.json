@@ -115,6 +115,10 @@
   "files.autoSaveDelay": 1000,
   "files.defaultLanguage": "plaintext",
   "files.eol": "\n",
+  // CRITICAL: Prevent disk sync conflicts that block agent file edits
+  "files.saveConflictResolution": "overwriteFileOnDisk",
+  "files.hotExit": "onExitAndWindowClose",
+  "files.refactoring.autoSave": true,
   "files.watcherExclude": {
     "**/node_modules/**": true,
     "**/.next/**": true,
@@ -128,7 +132,15 @@
     "**/.mypy_cache/**": true,
     "**/.pytest_cache/**": true,
     "**/venv/**": true,
-    "**/.venv/**": true
+    "**/.venv/**": true,
+    "**/temp/**": true,
+    "**/playground/**": true,
+    "**/content-pipeline/output/**": true,
+    "**/.turbo/**": true,
+    "**/.vercel/**": true,
+    "**/System Volume Information/**": true,
+    "**/$RECYCLE.BIN/**": true,
+    "**/.supabase/**": true
   },
   "files.exclude": {
     "**/.git": true,
