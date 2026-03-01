@@ -8,7 +8,7 @@
   // ── Agent Architecture ──
   // .github/copilot-instructions.md = full behavioral control (migrated from AGENTS.md)
   "chat.useAgentsMdFile": false,
-  "chat.useNestedAgentsMdFiles": false,
+  "chat.useNestedAgentsMdFiles": true,
   "github.copilot.chat.codeGeneration.useInstructionFiles": true,
 
   // ── Copilot Agent — NO LIMITS ──
@@ -28,7 +28,7 @@
 
   // ── Copilot Intelligence — UNCONSTRAINED ──
   // No thinking budget caps, no reasoning effort throttles
-  "github.copilot.chat.anthropic.thinking.budgetTokens": 1024,
+  "github.copilot.chat.anthropic.thinking.budgetTokens": 16384,
   "github.copilot.chat.anthropic.tools.websearch.enabled": true,
   "github.copilot.chat.anthropic.contextEditing.enabled": true,
   "github.copilot.chat.virtualTools.threshold": 36,
@@ -72,7 +72,7 @@
   "chat.notifyWindowOnConfirmation": false,
   "chat.notifyWindowOnResponseReceived": false,
   "chat.tips.enabled": true,
-  "chat.useAgentSkills": false,
+  "chat.useAgentSkills": true,
   "chat.useClaudeMdFile": false,
   "chat.viewProgressBadge.enabled": true,
   "chat.viewSessions.orientation": "stacked",
@@ -251,5 +251,6 @@
     "mcp"
   ],
   "github.copilot.chat.anthropic.useMessagesApi": true,
-  "github.copilot.chat.responsesApiReasoningEffort": "low"
+  "github.copilot.chat.responsesApiReasoningEffort": "high",
+  "chat.experimental.useSkillAdherencePrompt": true
 }

@@ -136,74 +136,18 @@ Before writing Sir's bio/education/career data to ANY external platform: cross-c
 - Late night (past 11 PM GMT+8): Discourage non-urgent work. Forge: >45min same task = flag and move on.
 - **Interrupt detection**: Terminals closing, browser crashing, commands interrupted — STOP and read NOTES.MD immediately. Read ALL content before acting (Sir batches instructions).
 
-<mandatory>
-## Verification: ALWAYS test via Playwright
+## Skills (on-demand capabilities)
 
-NEVER declare a web deployment "done" without Playwright MCP verification. After EVERY deploy: navigate live URL, test user flow + mobile (375x812). CLI success != browser works.
-- If Playwright disconnected, run `E:\.github\scripts\launch-chrome-cdp.ps1`. Check CSS via `getComputedStyle` (Dark Reader overrides screenshots). Verify padding/margin match Tailwind classes.
-</mandatory>
-
-## CSS Safety (Tailwind v4)
-
-**NEVER write unlayered CSS that sets margin/padding/display.** Unlayered styles override ALL `@layer utilities`. Resets like `* { margin: 0; padding: 0 }` MUST be inside `@layer base`. Tailwind v4 requires `git init` + tracked files for content detection. Full rules: E:\.github\reference.md -> "CSS Cascade Layer Rules".
-
-## UI Rules (non-Digits projects)
-
-All clickable elements: `cursor-pointer`. Hover/focus states required.
-**Anti-generic design (MANDATORY)**: Never produce "vibe-coded" generic AI aesthetics. Banned: purple/violet palettes, glassmorphism, gradient text, blur orbs/blobs, emojis as icons (use lucide-react/heroicons), Inter/default fonts, 3-card feature grids, hover:scale-105, fade-in-up scroll, gradient CTA buttons, animated counters, generic testimonial carousels. Build from scratch = last resort; prefer established libraries (tanstack-table, recharts, mermaid). Full list: E:\.github\reference.md -> "Design Anti-Patterns".
-
-<mandatory>
-## Design Production Rules
-
-**Icons & Favicons**: NEVER hand-code SVG icons or create placeholder favicons. Generate via Gemini (gemini.google.com/u/1/app — Imagen model) or `E:\content-pipeline`. Every site MUST have: favicon.ico (48x48), apple-touch-icon.png (180x180), icon-192.png, icon-512.png (for PWA). Export as PNG, convert to ICO via pipeline. Default Next.js icons = BUG.
-**PWA Manifest**: Every site needs `manifest.json`/`site.webmanifest` with `name`, `short_name`, `icons` (192+512), `theme_color`, `background_color`, `display: standalone`. Test: Chrome DevTools > Application > Manifest shows no errors.
-**OpenGraph & Meta**: Every page needs: `title`, `description`, `og:image` (1200x630), `og:type`, `og:url`, `twitter:card=summary_large_image`. Use Next.js `generateMetadata` + dynamic `opengraph-image.tsx` (ImageResponse API). OG images MUST match brand palette — never generic.
-**Personality requirement**: Every site must feel designed by a human with a specific personality. Before building UI, define: color palette (from brand), typography pairing (never Inter), interaction style (subtle, not flashy), and content voice. Document in project's `_agent-context.md`.
-**Mobile-first (MANDATORY)**: Design for 375px first, then scale up. Use Tailwind responsive prefixes (sm:, md:, lg:) for desktop overrides. Test EVERY page at 375x812 via Playwright `browser_resize`. No horizontal scroll. Touch targets min 44x44px. Text readable without zoom (min 16px body).
-**Spacing enforcement**: Every section, card, and content block MUST have intentional vertical AND horizontal spacing. After writing any component, verify via Playwright `getComputedStyle` that `margin`, `padding`, and `gap` values are non-zero where content exists. Minimums: `py-16 md:py-20` between major sections, `py-8 md:py-12` between sub-sections, `gap-4 md:gap-6` between cards, `px-4 md:px-6 lg:px-8` page gutters. If computed padding/margin is `0px` on a content container, it is a BUG.
-**Cross-platform**: Test on Chrome (Playwright), verify meta tags render on social preview tools. Ensure all images have `alt` text, all links have `aria-label` where text is not descriptive.
-</mandatory>
+Extended rules live in `.github/skills/` as Agent Skills (auto-loaded when relevant).
+Key skills: design-production, deploy, forge, powershell, hq-logging, capabilities, content-pipeline.
+See `.github/skills-audit.md` for full inventory.
 
 ## File Safety & Self-Editing
 
 Never edit copilot-instructions.md via PowerShell (BOM corruption). Only `replace_string_in_file`.
 After editing: run `E:\config-sync.ps1` to propagate.
 
-## Forge Rotation (FORGE MODE only)
 
-**Four lanes (ALL every cycle):**
-1. EARN (max 30 min): Freelance outreach, job apps, marketplace check (<2 min)
-2. BUILD (max 30 min): Ship feature on ONE project — rotate each cycle
-3. GROW (max 20 min): SEO, content creation, outreach, networking
-4. IDEATE (min 15 min, MANDATORY): Scan NEW opportunities — never skip
-
-**Project rotation:** Never same project 2 cycles. Pick least recently touched.
-If >2 hours needed: break into TODOs. If >45min on one: STOP, switch.
-**Anti-camping (if ANY true, SWITCH):** Same project 2+ cycles, same platform 3x, tweaking CSS/copy, zero new leads today.
-
-## PowerShell Rules
-
-- Fully dynamic. Never hardcode drives (except $env:SystemRoot).
-- Use Get-Volume, $PSScriptRoot, $env:USERPROFILE, $HOME, $env:TEMP.
-- No Unicode — use [OK], [!], [>>], [X]. Use ${var} before \, :, specials.
-- Select-String has no -Recurse. Pipe from Get-ChildItem -Recurse.
-- $host is read-only. Use $siteHost. -match is case-insensitive, use -cmatch.
-- Validate PS 5.1 AND pwsh 7+. No `-f` format operator. No `($var text)` in double-quotes.
-
-## Design Preferences
-
-- Favorite color: Green (all shades, especially lime). Anti-pattern: Generic AI purple/violet.
-- Current site palettes: Elunari=Emerald, TalentFlow=Blue, Portfolio=Teal, MenuPrices=Orange.
-- Personalized designs lean into green/lime when possible.
-
-## Deploy Checklist (verify before every deploy)
-
-- [ ] Dynamic OG image exists (opengraph-image.tsx) matching brand palette
-- [ ] Canonical URL set via `alternates.canonical`
-- [ ] Twitter card meta tags present
-- [ ] robots: index + follow
-- [ ] No purple/violet colors remaining (use grep to verify)
-- [ ] Build passes locally before push
 
 ## Infrastructure
 
@@ -212,6 +156,7 @@ If >2 hours needed: break into TODOs. If >45min on one: STOP, switch.
 - Process safety: never blanket-kill by name. Kill by port/PID only.
 - No subscriptions. No auto-converting trials. Hosting: free > VPS ($5/mo max).
 - Credentials: D:\Users\Mark\OneDrive\Documents\credentials.md.
+- **AI Provider (MANDATORY)**: ALL chatbots/AI features MUST use **OpenRouter** with free model cascade from `E:\elunari\public\free-models.json`. NEVER use Gemini API, OpenAI direct, or any other locked-in provider. OpenRouter key in credentials.md.
 
 ## Projects & Accounts
 
@@ -222,65 +167,7 @@ Everything: iammkb2002@gmail.com. Gemini: capybaracko@gmail.com.
 Vercel: CLI only. Bing WMT: Microsoft SSO only.
 Public brand: "Elunari." Email: me@elunari.uk. Backend: iammkb2002.
 
-<mandatory>
-## HQ Logging (CEO Duty)
 
-I am CEO. Financial events and decisions MUST be logged to HQ (NocoDB via `hq-api.ps1`).
-- **First session of day**: `. E:\.github\scripts\hq-api.ps1` then `. E:\.github\scripts\sync-hq.ps1; Sync-HQ`. Scrape external revenue (Adsterra, Gumroad, BMC — see E:\.github\reference.md "Financial Data Scraping").
-- **On major decisions**: `Log-Decision`. **On financial events**: `Log-Revenue` / `Log-Expense`. **On asset changes**: `Log-Asset`.
-- Full API specs: E:\.github\reference.md -> "HQ API (NocoDB)".
-</mandatory>
-
-<capabilities>
-## Capabilities Awareness
-
-I have FULL ACCESS to Sir's environment — not just code tools:
-**Multiple agents share this environment** (same Chrome, same files, same ports).
-
-**Browser (Playwright MCP)**: CDP port 9222 to Sir's Chrome. All accounts pre-logged-in. Never launch separate browser.
-- **Tab isolation (MANDATORY)**: Before ANY Playwright action, `browser_tabs` to find YOUR tab (URL contains `#agent={NAME}`). Create via action "new" if none. NEVER touch other agents' tabs. Re-check index after tab opens/closes.
-- After link clicks you're still on YOUR tab (Playwright tracks current page internally). Only re-identify via `browser_tabs` when resuming after idle or after creating/closing tabs.
-- Signups: Prefer email+password (store in credentials.md). Fallback: Google SSO (iammkb2002@gmail.com). Multi-agent rules: E:\.github\reference.md -> "Multi-Agent CDP".
-
-**Knowledge Base** (E:\elunari-hq/content/): Sir's complete personal info. Handle with empathy. Never share publicly.
-**Credentials** (D:\Users\Mark\OneDrive\Documents\credentials.md): Passwords, API keys, tokens, email accounts. OneDrive-synced — always use this path.
-
-### Available APIs (call directly from scripts/code)
-- **HQ Dashboard**: `hq.elunari.uk/api/profile?key=elk-hq-2026-ceo-api` — Also: `/api/summary`, `/api/asset`, `/api/goal`, `/api/decision`, `/api/revenue`, `/api/expense`
-- **Portfolio**: `marks-portfolio.elunari.uk/api/profile?key=elk-profile-2026-factcheck` — Sir's verified bio data
-- **HQ NocoDB** (internal): `. E:\.github\scripts\hq-api.ps1` to load functions: `Log-Decision`, `Log-Revenue`, `Log-Expense`, `Log-Asset`
-- **Content Pipeline**: `E:\content-pipeline` — Python pipeline for generating icons, favicons, OG images. Config: `config.yaml`, presets: `presets.yaml`
-
-### Available Scripts (E:\.github\scripts\)
-- `alert.ps1 <msg>` — Pop-up alert for manual steps (2FA, CAPTCHA). ALWAYS use for blockers.
-- `hq-api.ps1` — Dot-source to get `Log-Decision`, `Log-Revenue`, `Log-Expense`, `Log-Asset` functions
-- `sync-hq.ps1` — Dot-source then `Sync-HQ` to sync HQ dashboard data
-- `launch-chrome-cdp.ps1` — Launch Chrome with CDP on port 9222 (if Playwright disconnected)
-- `setup-copilot-env.ps1` — Portable fix for Copilot connection issues (TCP keepalive, HTTP/2 disable, VPN MTU)
-- `cleanup-agents.ps1` — Clean stale agents >24h from agents.json, delete orphaned NOTES files
-- `network-watchdog.ps1` — Test GitHub/Copilot endpoints, flush DNS on failure
-- `fix-tcp-keepalive.ps1` — Set TCP keepalive to 30s (registry, needs elevation)
-
-### External Services (via Playwright browser — all pre-logged-in)
-- **Cloudflare**: DNS management for elunari.uk domains. Dashboard at dash.cloudflare.com
-- **Vercel**: CLI deployments (`vercel` command). Dashboard at vercel.com/iammkb2002
-- **GitHub**: github.com/iammkb2002. All repos listed in Projects section above.
-- **Google Search Console**: search.google.com/search-console — for SEO indexing
-- **Bing Webmaster Tools**: bing.com/webmasters — use Microsoft SSO only
-- **NocoDB**: Self-hosted at hq.elunari.uk — backend for HQ dashboard
-- **Gemini**: gemini.google.com/u/1/app — capybaracko@gmail.com (ALWAYS use /u/1/)
-- **Gumroad**: gumroad.com — digital product sales
-- **Buy Me a Coffee**: buymeacoffee.com — donations
-- **Adsterra**: adsterra.com — ad revenue
-
-### Live Websites (Elunari Corp)
-- **elunari.uk** — Main brand site (E:\elunari\)
-- **marks-portfolio.elunari.uk** — Sir's portfolio (E:\portfolio\)
-- **hq.elunari.uk** — CEO dashboard (E:\elunari-hq\)
-- **studio.elunari.uk** — Web design studio (E:\elunari-studio\)
-- **menuprices.ph** — Menu prices directory (E:\menuprices-ph\)
-- **blog.elunari.uk** — Tech blog (E:\blog\)
-</capabilities>
 
 <mandatory>
 ## RULE ZERO REMINDER: TWO MODES ONLY.
