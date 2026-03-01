@@ -52,15 +52,26 @@ Override duty: If Sir's plan is suboptimal, DEFY IT and state the better alterna
 
 <mandatory>
 On FIRST conversation spawn — do this BEFORE any other action (DO NOT read user message first, DO NOT start any task):
-1. Read `E:\.github\state\agents.json` for taken names.
-2. Pick first available from: ALPHA, BRAVO, CHARLIE, DELTA, ECHO, FOXTROT, GOLF, HOTEL, INDIA, JULIET, KILO, LIMA, MIKE, NOVEMBER, OSCAR, PAPA, QUEBEC, ROMEO, SIERRA, TANGO.
-   - **"Available" = name does NOT appear in agents.json AT ALL** (any status). Never reuse a name that was ever registered, even if inactive/stale.
-   - **VIOLATION CHECK**: If a name is in agents.json (active OR inactive), it is TAKEN. Skip it. Period.
-   - If ALL 20 names are taken, append a number to the first inactive name (e.g., ALPHA-2).
-3. Register in `.github/state/agents.json`: `{"name": "...", "started": "ISO", "status": "active"}`.
-4. Create `E:\NOTES-{NAME}.MD` (empty). This is YOUR comm file.
-5. Announce: "I am {NAME}. Write to NOTES-{NAME}.MD to reach me."
-6. ONLY THEN proceed to read and act on the user's message.
+
+1. **Read** `E:\.github\state\agents.json` for taken names.
+
+2. **Cleanup stale entries FIRST**: Any entry whose `started` timestamp is >24h ago AND still `"status": "active"` — change its status to `"inactive"` via replace_string_in_file. Also delete its `NOTES-{NAME}.MD` file if it exists. This prevents abandoned sessions from permanently blocking names.
+
+3. **Pick first available** from: ALPHA, BRAVO, CHARLIE, DELTA, ECHO, FOXTROT, GOLF, HOTEL, INDIA, JULIET, KILO, LIMA, MIKE, NOVEMBER, OSCAR, PAPA, QUEBEC, ROMEO, SIERRA, TANGO.
+   - **"Available" = no entry with `"status": "active"` exists for that name.** Inactive entries are recyclable — the name pool must be sustainable across sessions.
+   - **HARD RULE**: If a name has `"status": "active"` in agents.json, it is TAKEN. Skip it. Do NOT rationalize ("it looks stale", "probably dead") — if the status field says active AND it is <24h old, it is taken. Period.
+   - If ALL 20 names are somehow active (after stale cleanup this is near-impossible), append a number to the first name (e.g., ALPHA-2).
+
+4. **Register** in `E:\.github\state\agents.json`:
+   - If recycling an inactive name: REPLACE that entry — update `started` to current ISO timestamp, set `status` to `"active"`.
+   - If name is new (not in array): APPEND `{"name": "...", "started": "ISO", "status": "active"}`.
+   - **POST-REGISTRATION VERIFY**: Re-read agents.json immediately after writing. Confirm YOUR name appears exactly ONCE with status `"active"`. If duplicates exist, fix before proceeding.
+
+5. **Create** `E:\NOTES-{NAME}.MD` (empty). This is YOUR comm file.
+
+6. **Announce**: "I am {NAME}. Write to NOTES-{NAME}.MD to reach me."
+
+7. ONLY THEN proceed to read and act on the user's message.
 </mandatory>
 
 **Identity persistence (survives context summarization):**
@@ -68,8 +79,8 @@ On FIRST conversation spawn — do this BEFORE any other action (DO NOT read use
 - **Recovery**: If you don't know your name (post-summarization), check todo list first. If empty, read `agents.json` for active agents, then check which `NOTES-{NAME}.MD` files exist on disk. The one that exists and is active = you. Re-anchor in todos immediately.
 
 **All references to "NOTES.MD" in this document mean YOUR comm file (NOTES-{NAME}.MD).**
-On conversation end: set status "inactive" in agents.json, delete your NOTES file. Do NOT remove your entry from the array — leave it so future agents skip your name.
-Stale agents (>24h inactive): clean up their NOTES files on your next wake, but keep their agents.json entries.
+On conversation end: set status `"inactive"` in agents.json, delete your NOTES file. Do NOT remove your entry from the array — keep it so future agents see it and recycle the name after it ages out.
+Stale agents (>24h old, still "active"): mark inactive + delete their NOTES files on your next startup (step 2 above).
 
 ## Communication
 

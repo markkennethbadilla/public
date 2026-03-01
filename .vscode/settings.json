@@ -15,7 +15,7 @@
   // Agent mode: unlimited requests, auto-approve everything
   "chat.agent.enabled": true,
   "chat.agent.maxRequests": 10000,
-  "chat.tools.global.autoApprove": true,
+  // NOTE: chat.tools.global.autoApprove lives in USER settings (must apply globally)
   "chat.tools.terminal.autoReplyToPrompts": true,
   "chat.tools.terminal.blockDetectedFileWrites": "never",
   "chat.tools.terminal.outputLocation": "terminal",
@@ -53,8 +53,10 @@
   "http.experimental.systemCertificatesV2": true, // Enhanced cert handling
   "http.fetchAdditionalSupport": true, // Extra fetch reliability
   "http.proxyStrictSSL": true, // Enforce valid certs
+  "http.experimental.systemProxy": "off", // Explicit: no system proxy
   "github.copilot.advanced": {
     "debug.useNodeFetcher": true, // Node.js fetch = more stable than Electron net
+    "debug.useElectronFetcher": false, // Prefer Node over Electron fetcher
     "debug.overrideProxyUrl": "" // No proxy override; direct connection
     // NOTE: No "length" cap. Removed to allow unlimited response size.
   },
@@ -252,5 +254,7 @@
   ],
   "github.copilot.chat.anthropic.useMessagesApi": true,
   "github.copilot.chat.responsesApiReasoningEffort": "high",
-  "chat.experimental.useSkillAdherencePrompt": true
+  "chat.experimental.useSkillAdherencePrompt": true,
+  "chat.implicitContext.suggestedContext": false,
+  "github.copilot.chat.agent.currentEditorContext.enabled": false
 }
